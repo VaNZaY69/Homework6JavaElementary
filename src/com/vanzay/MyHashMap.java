@@ -44,21 +44,22 @@ public class MyHashMap<K, V> {
         }
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
     public V get(K key) {
         int index = getIndex(key);
         Node<K, V> element = buckets[index];
-        while(element != null) {
-            if(element.key.equals(key)) {
+        while (element != null) {
+            if (element.key.equals(key)) {
                 return element.value;
             }
             element = element.next;
         }
         return null;
     }
+
     public Set<K> keySet() {
         Set<K> keys = new HashSet<>();
         for (Node<K, V> bucket : buckets) {
@@ -74,11 +75,11 @@ public class MyHashMap<K, V> {
         int index = getIndex(key);
         Node<K, V> element = buckets[index];
 
-        if(element != null) {
-            if(element.key.equals(key)) {
+        if (element != null) {
+            if (element.key.equals(key)) {
                 element.value = value;
             } else {
-                while(element.next != null) {
+                while (element.next != null) {
                     element = element.next;
                 }
                 element.next = new Node<>(key, value);
@@ -91,10 +92,10 @@ public class MyHashMap<K, V> {
         }
     }
 
-    public boolean contains(K key){
+    public boolean contains(K key) {
         int index = getIndex(key);
-        while(buckets[index] != null) {
-            if(buckets[index].key.equals(key)) {
+        while (buckets[index] != null) {
+            if (buckets[index].key.equals(key)) {
                 return true;
             }
             buckets[index] = buckets[index].next;
@@ -103,6 +104,6 @@ public class MyHashMap<K, V> {
     }
 
     private int getIndex(K key) {
-       return Math.abs(key.hashCode() % buckets.length);
+        return Math.abs(key.hashCode() % buckets.length);
     }
 }
